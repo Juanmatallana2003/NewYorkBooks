@@ -1,8 +1,10 @@
 FROM maven:3.9.6-amazoncorretto-21 AS builder
 WORKDIR /app
-COPY pom.xml .
+
+COPY booksapp/pom.xml .
 RUN mvn dependency:go-offline -B
-COPY src ./src
+
+COPY booksapp/src ./src
 RUN mvn clean package -DskipTests
 
 FROM amazoncorretto:21-alpine

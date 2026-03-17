@@ -1,0 +1,96 @@
+:root {
+    --font-family: 'Inter', sans-serif;
+    --bg-color: #f8fafc; --text-color: #334155; --text-muted: #64748b;
+    --card-bg: #ffffff; --header-bg: rgba(255, 255, 255, 0.85); --header-text: #0f172a;
+    --primary: #4f46e5; --primary-hover: #4338ca; --border: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1); --hover-bg: #f1f5f9;
+}
+
+.dark-mode {
+    --bg-color: #0f172a; --text-color: #e2e8f0; --text-muted: #94a3b8;
+    --card-bg: #1e293b; --header-bg: rgba(30, 41, 59, 0.85); --header-text: #f8fafc;
+    --primary: #6366f1; --primary-hover: #818cf8; --border: #334155;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5); --hover-bg: #334155;
+}
+
+* { box-sizing: border-box; }
+body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; transition: background-color 0.3s ease, color 0.3s ease; }
+
+.app-header { background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: var(--header-text); padding: 1.2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+.header-brand { display: flex; align-items: center; gap: 16px; }
+.logo-mark { background: var(--primary); color: white; width: 44px; height: 44px; border-radius: 10px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); }
+.brand-text { display: flex; flex-direction: column; }
+.brand-text h1 { margin: 0; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; line-height: 1.2; }
+.brand-subtitle { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+.header-controls { display: flex; gap: 12px; }
+.btn-icon { display: flex; align-items: center; gap: 8px; padding: 10px 18px; font-size: 0.9rem; }
+.btn-icon svg { transition: transform 0.2s ease; }
+.btn-icon:hover svg { transform: scale(1.1); }
+
+button { font-family: var(--font-family); font-weight: 600; border: none; border-radius: 8px; padding: 10px 16px; cursor: pointer; transition: all 0.2s ease; }
+.btn-primary { background-color: var(--primary); color: white; }
+.btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+.btn-secondary { background-color: transparent; color: var(--text-color); border: 1px solid var(--border); }
+.btn-secondary:hover { background-color: var(--hover-bg); }
+.btn-theme { background-color: var(--hover-bg); color: var(--text-color); }
+.btn-theme:hover { background-color: var(--border); }
+
+main { display: flex; gap: 30px; max-width: 1400px; margin: 40px auto; padding: 0 30px; }
+.menu { flex: 0 0 280px; background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--border); height: fit-content; }
+.menu h3 { margin-top: 0; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 15px; }
+.menu-btn { display: block; width: 100%; text-align: left; background: transparent; color: var(--text-color); padding: 12px 15px; margin-bottom: 5px; border-radius: 8px; font-weight: 500; }
+.menu-btn:hover { background: var(--hover-bg); }
+.menu-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
+
+.content { flex: 1; background: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--border); min-height: 600px; }
+.form-hidden { display: none; }
+.form-active { display: flex; gap: 20px; align-items: flex-end; background: var(--bg-color); padding: 20px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 30px; }
+.input-group { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.input-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+input { font-family: var(--font-family); font-size: 1rem; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-color); outline: none; transition: border 0.2s; }
+input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+
+.home-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid var(--border); }
+.home-header h2 { font-size: 2.2rem; color: var(--text-color); margin-bottom: 10px; }
+.home-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+.badge-top { background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: inline-block; }
+
+.results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-top: 20px; }
+.book-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; }
+.book-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+.book-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; }
+.img-wrapper { position: relative; width: 100%; aspect-ratio: 2/3; background: var(--hover-bg); overflow: hidden; }
+.book-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.book-card:hover img { transform: scale(1.05); }
+
+.buy-badge { position: absolute; bottom: 10px; right: 10px; background: rgba(15, 23, 42, 0.85); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; backdrop-filter: blur(4px); }
+.book-card:hover .buy-badge { opacity: 1; transform: translateY(0); }
+.book-info { padding: 15px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.book-info h4 { margin: 0 0 8px 0; font-size: 1.05rem; line-height: 1.3; color: var(--text-color); }
+.book-info p { margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+
+.list-container { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+.list-item { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+.list-item:hover { background: var(--hover-bg); }
+.list-item:last-child { border-bottom: none; }
+.item-content { display: flex; flex-direction: column; gap: 4px; }
+.item-title { font-weight: 600; font-size: 1.05rem; color: var(--text-color); }
+.item-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+.badge { background: var(--hover-bg); color: var(--text-muted); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border); }
+.btn-buy-small { background: var(--primary); color: white; text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; transition: 0.2s; }
+.btn-buy-small:hover { background: var(--primary-hover); transform: scale(1.05); }
+
+.category-title { margin-top: 35px; color: var(--text-color); border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+.error-msg { background: #fee2e2; color: #b91c1c; padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444; font-weight: 600; }
+.dark-mode .error-msg { background: #7f1d1d; color: #fecaca; border-color: #f87171; }
+.loader-container { text-align: center; padding: 40px; color: var(--text-muted); }
+.spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px auto; box-shadow: 0 0 15px var(--primary); }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.book-card, .list-item, .home-header { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+#results { transition: opacity 0.3s ease-in-out; }

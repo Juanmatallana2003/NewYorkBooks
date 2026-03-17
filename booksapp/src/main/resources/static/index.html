@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYT Books Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-brand" onclick="loadHomePage()" style="cursor: pointer;" title="Volver al Inicio">
+            <div class="logo-mark">
+                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <h1>NYT Books Explorer</h1>
+                <span class="brand-subtitle">Developer API Interface</span>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button id="export-btn" class="btn-icon btn-secondary" style="display: none;" title="Exportar resultados">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Exportar JSON</span>
+            </button>
+            <button id="theme-toggle" class="btn-icon btn-theme">
+                <svg id="moon-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <span id="theme-text">Modo Oscuro</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <aside class="menu">
+            <h3>Consultas Disponibles</h3>
+            <nav id="menu-nav">
+                <button onclick="loadCategories()" class="menu-btn" data-index="1">1. Todas las Categorías</button>
+                <button onclick="loadOverview()" class="menu-btn" data-index="2">2. Top 10 Global (Overview)</button>
+                <button onclick="showDateForm()" class="menu-btn" data-index="3">3. Libros por Fecha y Categoría</button>
+                <button onclick="showHistoryForm()" class="menu-btn" data-index="4">4. Historial de Best Sellers</button>
+                <button onclick="showReviewsForm()" class="menu-btn" data-index="5">5. Buscar Reseñas</button>
+                <button onclick="showListDataForm()" class="menu-btn" data-index="6">6. Info General de una Lista</button>
+            </nav>
+        </aside>
+
+        <section class="content">
+            <div id="forms-container">
+                <div id="form-date" class="form-hidden">
+                    <div class="input-group">
+                        <label>Fecha de publicación</label>
+                        <input type="date" id="input-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Nombre de la lista</label>
+                        <input type="text" id="input-list" placeholder="Ej: hardcover-fiction" required>
+                    </div>
+                    <button onclick="searchByDate()" class="btn-primary">Buscar</button>
+                </div>
+                <div id="form-history" class="form-hidden">
+                    <div class="input-group">
+                        <label>Autor del libro</label>
+                        <input type="text" id="input-author" placeholder="Ej: Stephen King">
+                    </div>
+                    <button onclick="searchHistory()" class="btn-primary">Buscar Historial</button>
+                </div>
+                <div id="form-reviews" class="form-hidden">
+                    <div class="input-group">
+                        <label>Título exacto o parcial</label>
+                        <input type="text" id="input-title" placeholder="Ej: 1984">
+                    </div>
+                    <button onclick="searchReviews()" class="btn-primary">Buscar Reseñas</button>
+                </div>
+                <div id="form-list-data" class="form-hidden">
+                    <div class="input-group">
+                        <label>Nombre de la lista NYT</label>
+                        <input type="text" id="input-list-name" placeholder="Ej: e-book-fiction">
+                    </div>
+                    <button onclick="searchListData()" class="btn-primary">Buscar Lista</button>
+                </div>
+            </div>
+
+            <div id="loading" class="loader-container" style="display: none;">
+                <div class="spinner"></div>
+                <p>Consultando al New York Times...</p>
+            </div>
+            <div id="results" class="results-container"></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

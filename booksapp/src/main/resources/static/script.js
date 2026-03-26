@@ -254,3 +254,16 @@ document.getElementById("export-btn").addEventListener("click", () => {
 });
 
 window.onload = loadHomePage;
+
+// --- REGISTRO DEL SERVICE WORKER (PWA) ---
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('PWA: Service Worker registrado con éxito.', registration.scope);
+            })
+            .catch(error => {
+                console.log('PWA: Falló el registro del Service Worker.', error);
+            });
+    });
+}

@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>4.0.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.nyt</groupId>
 	<artifactId>booksapp</artifactId>
@@ -14,41 +14,33 @@
 	<name/>
 	<description/>
 	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
+	<licenses><license/></licenses>
+	<developers><developer/></developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection/><developerConnection/><tag/><url/>
 	</scm>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-web</artifactId> <!-- FIX: era spring-boot-starter-webmvc (no estándar) -->
 		</dependency>
+
+		<!-- FIX: reemplaza los dos artefactos de test que no existen -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

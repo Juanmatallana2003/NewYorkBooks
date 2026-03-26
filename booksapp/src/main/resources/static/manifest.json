@@ -1,0 +1,21 @@
+{
+  "name": "NYT Books Explorer",
+  "short_name": "NYT Books",
+  "description": "Explora los libros más vendidos del New York Times.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "icons":[
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3389/3389081.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/192/3389/3389081.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

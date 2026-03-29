@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nyt-books-v2';
+const CACHE_NAME = 'nyt-books-v3';
 const ASSETS_TO_CACHE =[
     '/',
     '/index.html',

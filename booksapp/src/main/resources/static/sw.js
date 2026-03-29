@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nyt-books-v2'; // Cambiamos a v2 para forzar la actualización
+const CACHE_NAME = 'nyt-books-v2';
 const ASSETS_TO_CACHE =[
     '/',
     '/index.html',
@@ -9,7 +9,7 @@ const ASSETS_TO_CACHE =[
 ];
 
 self.addEventListener('install', (event) => {
-    self.skipWaiting(); // Obliga al nuevo Service Worker a instalarse inmediatamente
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             console.log('Guardando interfaz base en Caché');
@@ -18,7 +18,6 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Este evento borra la caché vieja (donde se quedó atascado el error 404)
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => {
@@ -35,21 +34,19 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    // REGLA 1: Si es una petición a la API, SIEMPRE buscar en internet (NO USAR CACHÉ)
+
     if (event.request.url.includes('/api/')) {
         event.respondWith(
             fetch(event.request).catch(() => {
-                // Solo si no hay internet devolvemos un mensaje de error
                 return new Response(
                     JSON.stringify({ error: "Estás sin conexión a internet o el servidor falló." }),
                     { headers: { 'Content-Type': 'application/json' } }
                 );
             })
         );
-        return; // Detenemos la ejecución aquí
+        return;
     }
 
-    // REGLA 2: Para los demás archivos (HTML, CSS, imágenes), usar caché primero
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             return cachedResponse || fetch(event.request);

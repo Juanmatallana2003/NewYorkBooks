@@ -32,6 +32,11 @@ async function fetchFromAPI(endpoint) {
 
     try {
         const response = await fetch(url);
+        
+        if (response.status === 404 && url.includes("/lists/names.json")) {
+            throw new Error("Mantenimiento NYT_BUG_404");
+        }
+        
         if (!response.ok) throw new Error(`El servidor respondió con código: ${response.status}`);
         
         const data = await response.json();
@@ -42,7 +47,20 @@ async function fetchFromAPI(endpoint) {
         document.getElementById("export-btn").style.display = "flex";
         return data;
     } catch (error) {
-        document.getElementById("results").innerHTML = `<div class="error-msg">No se pudieron obtener los datos: ${error.message}</div>`;
+        
+        if (error.message === "Mantenimiento NYT_BUG_404") {
+             document.getElementById("results").innerHTML = `
+                <div style="background-color: #fff3f3; color: #d32f2f; padding: 26px; border-radius: 10px; border-left: 6px solid #d32f2f; margin-top: 26px;">
+                    <h3 style="margin-top: 0;"> Categorías no disponibles por ahora </h3>
+                    <p>El servidor oficial del New York Times (NYT API) está reportando un error interno <b>("list not found")</b> en esta ruta específica.</p>
+                    <p>Esto <b>no es un error de tu aplicación</b>, sino del proveedor de datos. ¡Intenta ver el Top 10 Global o buscar reseñas mientras el NYT lo soluciona!</p>
+                </div>
+            `;
+            alert("¡Aviso! El servidor del New York Times está en mantenimiento para las Categorías.\n\nTienen un error interno en su API oficial. Por favor, usa el Top 10 o las demás opciones mientras ellos lo solucionan.");
+        } else {
+             document.getElementById("results").innerHTML = `<div class="error-msg">No se pudieron obtener los datos: ${error.message}</div>`;
+        }
+        
         return null;
     } finally {
         document.getElementById("loading").style.display = "none";
@@ -82,20 +100,23 @@ async function loadHomePage() {
 
 async function loadCategories() {
     hideForms(); setActiveMenu(1);
-    const data = await fetchFromAPI("/lists/names.json");
+    
+    const data = await fetchFromAPI('/lists/names.json');
     if (!data) return;
 
-    let html = `<h2>Categorías Literarias (Top 10)</h2><div class='list-container'>`;
-    data.results.slice(0, 10).forEach((list, index) => {
+    let html = `<h2>Todas las Categorías Oficiales del NYT</h2><div class='list-container'>`;
+    
+    data.results.forEach((category, index) => {
         html += `
-        <div class="list-item" style="animation-delay: ${index * 0.08}s;">
+        <div class="list-item" style="animation-delay: ${index * 0.05}s;">
             <div class="item-content">
-                <span class="item-title">${list.display_name}</span>
-                <span class="item-sub">Frecuencia: ${list.updated === 'WEEKLY' ? 'Semanal' : 'Mensual'}</span>
+                <span class="item-title">${category.display_name}</span>
+                <span class="item-sub">Actualización: ${category.updated} | Primer libro: ${category.oldest_published_date}</span>
             </div>
-            <span class="badge">Actualización: ${list.newest_published_date}</span>
+            <span class="badge">Cod: ${category.list_name_encoded}</span>
         </div>`;
     });
+    
     html += "</div>";
     document.getElementById("results").innerHTML = html;
 }
@@ -255,7 +276,6 @@ document.getElementById("export-btn").addEventListener("click", () => {
 
 window.onload = loadHomePage;
 
-// --- REGISTRO DEL SERVICE WORKER (PWA) ---
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')

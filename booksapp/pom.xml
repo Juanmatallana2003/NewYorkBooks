@@ -31,10 +31,9 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId> <!-- FIX: era spring-boot-starter-webmvc (no estándar) -->
+			<artifactId>spring-boot-starter-web</artifactId> 
 		</dependency>
 
-		<!-- FIX: reemplaza los dos artefactos de test que no existen -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
